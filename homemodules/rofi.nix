@@ -1,13 +1,14 @@
-{ config, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
 
 home.file.".config/rofi/config.rasi" = {
   text = ''
     configuration {
-        modi: "drun";
+        modi: "drun,calc";
         show-icons: true;
-        display-drun: " ";
+        display-drun: " ";
+        display-calc: "󰃬 ";
         drun-display-format: "{name}";
         font: "JetBrainsMono Nerd Font 11";
     }

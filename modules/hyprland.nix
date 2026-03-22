@@ -20,6 +20,7 @@
   config.common = {
     default = [ "hyprland" "gtk" ];
     "org.freedesktop.impl.portal.Settings" = [ "gtk" ];
+    "org.freedesktop.impl.portal.FileChooser" = [ "gtk" ];
     };
   };
 

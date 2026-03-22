@@ -16,7 +16,6 @@ in
     enabledExtensions = with spicePkgs.extensions; [
       adblockify
       shuffle
-      hidePodcasts
     ];
   };
 }

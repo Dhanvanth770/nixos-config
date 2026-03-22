@@ -10,6 +10,7 @@
     winetricks                                     
     vulkan-tools
     protonup-qt          
+    (bottles.override { removeWarningPopup = true; })
     ];
  
   programs.gamemode = {
@@ -21,3 +22,4 @@
   };
 
 }
+

@@ -16,10 +16,11 @@
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.systemd-boot.configurationLimit = 5;
+  boot.loader.systemd-boot.configurationLimit = 3;
 
   # Enable ly dm
   services.displayManager.ly.enable = true;
+  services.displayManager.ly.settings = { clock = "%c"; };
 
   # Garbage Collection
   nix.gc = {
@@ -33,6 +34,8 @@
   # Kernel
   nixpkgs.overlays = [ inputs.nix-cachyos-kernel.overlays.pinned ];
   boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-latest-lto-x86_64-v3;
+  nix.settings.substituters = [ "https://cache.nixos.org" "https://cache.garnix.io" ];
+  nix.settings.trusted-public-keys = [ "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=" "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g=" ];
  
   # kernel params
   boot.kernelParams = [
@@ -56,9 +59,6 @@
   # zram and fstrim enable
   zramSwap.enable = true;
   services.fstrim.enable = true;
-
-  networking.hostName = "nixos"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Pipewire
   services.pipewire = {
@@ -96,6 +96,9 @@
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
+
+  networking.hostName = "thispc"; # Define your hostname.
+  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Enable networking
   networking.networkmanager.enable = true;
@@ -159,9 +162,9 @@
   vim
   wget
   hyprpanel
-  rofi
   swww
   alacritty
+  (rofi.override { plugins = [ rofi-calc ]; })
   brightnessctl
   wl-clipboard
   zip
@@ -176,7 +179,11 @@
   gsettings-desktop-schemas
   mission-center
   qbittorrent-enhanced
+  hyprlock
   ];
+
+  # Run binaries
+  programs.nix-ld.enable = true;
 
   # Enable expirimental
   nix.settings.experimental-features = [ "nix-command" "flakes" ];

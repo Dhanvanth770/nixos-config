@@ -13,7 +13,7 @@
   };
 
   outputs = { self, nixpkgs, spicetify-nix, home-manager, nix-cachyos-kernel, nix-flatpak, ... }@inputs: {
-      nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+      nixosConfigurations.thispc = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux"; 
       specialArgs = { inherit inputs; };
       modules = [

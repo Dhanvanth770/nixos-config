@@ -42,7 +42,7 @@
           blur {
               enabled = true
               size = 3
-              passes = 2
+              passes = 4
               vibrancy = 0.1696
           }
       }
@@ -135,6 +135,8 @@
       bind = SUPER, P, pseudo,
       bind = SUPER, J, togglesplit,
       bind = SUPER, W, exec, ~/.local/bin/wallpaper-picker
+      bind = SUPER, L, exec, hyprlock
+      bind = SUPER, C, exec, rofi -show calc -modi calc -no-show-match -no-sort
       
       # Screen capture
       bind = SUPER SHIFT, S, exec, mkdir -p ~/Pictures/Screenshots && grim -g "$(slurp)" - | tee ~/Pictures/Screenshots/$(date +'%Y-%m-%d_%H-%M-%S').png | wl-copy && notify-send "Screenshot Captured" "Saved to Screenshots folder and copied to clipboard" -i camera-photo
@@ -199,9 +201,11 @@
       windowrule = match:class xdg-desktop-portal-gtk, float on
       windowrule = match:class xdg-desktop-portal-gtk, center on
       windowrule = match:class xdg-desktop-portal-gtk, size 900 600
+      windowrule = float on, match:class org.gnome.Calculator
+      windowrule = size 360 616, match:class org.gnome.Calculator
+      windowrule = center on, match:class org.gnome.Calculator
       layerrule = blur on, match:namespace ^(rofi)$
-      layerrule = ignore_alpha 0.5, match:namespace ^(rofi)$ 
-
+      layerrule = ignore_alpha 0.5, match:namespace ^(rofi)$  
       '';
   };
 }

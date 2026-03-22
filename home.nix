@@ -1,5 +1,5 @@
 
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, inputs, lib, ... }:
 
 {
 
@@ -7,6 +7,8 @@
     ./homemodules/hyprland.nix
     ./homemodules/alacritty.nix
     ./homemodules/rofi.nix
+    ./homemodules/fastfetch.nix
+    ./homemodules/hyprpanel.nix
   ];
 
   home.username = "dhanvanth";
@@ -16,7 +18,6 @@
   # Per user packages
   home.packages = with pkgs; [
   nitch
-  fastfetch
   btop
   zsh-powerlevel10k
   cava
@@ -31,8 +32,17 @@
   loupe
   papers
   mousepad
+  duf
+  bat
+  imagemagick
+  cowsay
+  tmux
+  lazygit
+  bottom
+  kew
+  spotdl
   ];
-
+ 
   # enable zsh
   programs.zsh = {
     enable = true;
@@ -46,15 +56,15 @@
   };
   initContent = ''
       source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
-      [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+     [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
       if [[ -z "$_NITCH_ONCE" ]]; then
       export _NITCH_ONCE=1
       ${pkgs.nitch}/bin/nitch
     fi
   '';
   shellAliases = {
-    rebuild = "sudo nixos-rebuild switch --flake /etc/nixos#nixos";
-    upgrade = "cd /etc/nixos && sudo nix flake update && sudo nixos-rebuild switch --flake .#nixos";
+    rebuild = "sudo nixos-rebuild switch --flake /etc/nixos#thispc";
+    upgrade = "cd /etc/nixos && sudo nix flake update && sudo nixos-rebuild switch --flake .#thispc";
     clean = "sudo nix-env --delete-generations old && sudo nix-collect-garbage -d";
     ls = "eza --icons=always";
     ll = "eza --icons=always -l --header";
@@ -75,6 +85,12 @@
     "--header"
     ];
   };
+
+   # enable zoxide
+   programs.zoxide = {
+   enable = true;
+   enableZshIntegration = true;
+   };
 
    # home variables
    home.sessionVariables = {
@@ -137,6 +153,75 @@
             --transition-duration 1.5
     fi
     '';
+  };
+
+  # hyprlock
+  programs.hyprlock = {
+  enable = true;
+  settings = {
+    general = {
+      disable_loading_bar = false;
+      hide_cursor = true;
+      grace = 5;
+    };
+    background = [
+      {
+        path = "screenshot";
+        blur_passes = 3;
+        blur_size = 8;
+      }
+    ];
+    input-field = [
+      {
+        size = "200, 50";
+        position = "0, -80";
+        monitor = "";
+        dots_center = true;
+        fade_on_empty = false;
+        font_color = "rgb(ffffff)";
+        inner_color = "rgb(000000)";
+        outer_color = "rgb(ffffff)";
+        outline_thickness = 2;
+        placeholder_text = " Password...";
+        shadow_passes = 2;
+      }
+    ];
+    label = [
+      {
+        text = "$TIME";
+        font_size = 64;
+        font_family = "JetBrainsMono Nerd Font";
+        position = "0, 80";
+        halign = "center";
+        valign = "center";
+        color = "rgba(255, 255, 255, 1.0)";
+        }
+      ];
+    };
+  };
+
+  # hypridle
+  services.hypridle = {
+  enable = true;
+  settings = {
+    general = {
+      after_sleep_cmd = "hyprctl dispatch dpms on && hyprlock";
+      ignore_dbus_inhibit = false;
+      lock_cmd = "hyprlock";
+      before_sleep_cmd = "hyprlock";
+    };
+    listener = [
+      {
+        timeout = 300;
+        on-timeout = "hyprlock";
+      }
+      {
+        timeout = 600;
+        on-timeout = "hyprctl dispatch dpms off";
+        on-resume = "hyprctl dispatch dpms on";
+        }
+      ];
+    };
   };
 
   programs.home-manager.enable = true;

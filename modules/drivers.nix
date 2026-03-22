@@ -9,6 +9,7 @@
     nvidia-vaapi-driver
     libva-vdpau-driver
     libvdpau-va-gl
+    nvtopPackages.nvidia
     ];
   };
 
