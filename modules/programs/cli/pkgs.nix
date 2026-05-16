@@ -8,7 +8,7 @@
   cava
   unimatrix
   pipes
-  asciiquarium
+  asciiquarium-transparent
   tty-clock
   yazi
   duf

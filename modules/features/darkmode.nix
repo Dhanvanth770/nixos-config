@@ -19,6 +19,7 @@
       };
       gtk3.extraConfig = {
         gtk-application-prefer-dark-theme = true;
+        gtk-theme-name = "Adwaita-dark";
       };
     };
     qt = {
@@ -42,6 +43,12 @@
   @define-color accent_color #ffb454;
   @define-color sidebar_bg_color #000000;
   @define-color sidebar_fg_color #ffffff;
+  @define-color theme_selected_bg_color #ffb454;
+  @define-color theme_selected_fg_color #000000;
+  @define-color selected_bg_color #ffb454;
+  @define-color selected_fg_color #000000;
+  @define-color theme_unfocused_selected_bg_color #cc8f44;
+  @define-color theme_unfocused_selected_fg_color #000000;
 
   /* Base Layout */
   window, .background {
@@ -178,7 +185,38 @@
     background-color: #000000 !important;
     color: #ffffff;
     }
-   '';  
+
+  .view row:selected,
+  treeview row:selected {
+  background-color: #ffb454 !important;
+  color: #000000 !important;
+  }
+
+  .view row:selected *,
+  treeview row:selected * {
+  color: #000000 !important;
+  }
+
+  treeview:focus row:selected,
+  treeview row:selected:focus {
+  background-color: #ffb454 !important;
+  color: #000000 !important;
+  }
+
+  treeview.view:selected,
+  treeview.view:selected:focus,
+  .view:selected,
+  .view:selected:focus {
+  background-color: @theme_selected_bg_color;
+  color: @theme_selected_fg_color;
+  }
+
+  * {
+  font-weight: 777;
+  }
+
+   ''; 
+
 
   "gtk-4.0/gtk.css".text = ''
     @define-color window_bg_color #000000;
@@ -217,13 +255,14 @@ popover contents, popover > contents, .menu {
   color: #ffffff;
   border: none;
   border-radius: 8px;
-  padding: 0;
+  padding: 4px;
   margin: 0;
+  max-width: 200px;
 }
 
 popover modelbutton, .menu modelbutton {
-  padding: 2px 6px;
-  min-height: 0;
+  padding: 6px 12px;
+  min-height: 24px;
 /*  margin: 0; */
 }
 
@@ -232,12 +271,33 @@ popover {
   border-radius: 4px;
 }
 
+    .context-menu {
+  max-width: 200px;
+  min-width: 0;
+}
+
+popover > contents > box {
+  max-width: 200px;
+  min-width: 0;
+}
+
+popover > contents {
+  padding: 4px;
+  max-width: 200px;
+  min-width: 0;
+}
+
     /* Highlight the selected item with your orange accent */
     .navigation-sideways row:selected, list row:selected {
       background-color: #ffb454;
-      color: #fffff;
+      color: #000000;
      }
-        '';
+
+  .sidebar-item:selected,
+  row:selected label {
+    color: #000000;
+  }
+        '';    
       };
     };
 }

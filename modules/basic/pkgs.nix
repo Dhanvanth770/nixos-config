@@ -18,7 +18,6 @@
     glib
     gsettings-desktop-schemas
     brightnessctl
-    nh
     p7zip
     libnotify
     nvtopPackages.nvidia

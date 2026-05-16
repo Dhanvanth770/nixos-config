@@ -11,7 +11,7 @@
     vulkan-loader
     protonup-qt          
     protonplus
-    inputs.prismlauncher-ely.packages.${pkgs.system}.prismlauncher
+    inputs.prismlauncher-ely.packages.${pkgs.stdenv.hostPlatform.system}.prismlauncher
     temurin-bin-25
     faugus-launcher
     heroic
