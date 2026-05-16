@@ -1,3 +1,3 @@
 # **Flippan's NixOS-config**
 
-./images/desktop.png
+![My Setup](./image_dea53a.png)
