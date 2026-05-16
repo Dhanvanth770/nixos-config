@@ -1,5 +1,11 @@
 { pkgs, inputs, ... }:
 
 {
-  services.fwupd.enable = true;
+  services.fwupd = {
+    enable = true;
+    daemonSettings = {
+      EspLocation = "/boot";
+      OnlyTrusted = true; 
+    };
+  };
 }

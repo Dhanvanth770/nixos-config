@@ -3,7 +3,7 @@
 {
   home-manager.users.dhanvanth = {
     programs.zsh = {
-    enable = true;
+    enable = false;
     shellAliases = {
       rebuild = "sudo nixos-rebuild switch --flake /etc/nixos#thispc";
       upgrade = "cd /etc/nixos && sudo nix flake update && sudo nixos-rebuild switch --flake .#thispc";
@@ -17,7 +17,7 @@
       nhs ="nh os switch /etc/nixos";
       nhb ="nh os boot /etc/nixos"; 
       nht ="nh os test /etc/nixos";
-      update ="nh os switch /etc/nixos --update";
+      update ="sudo nix flake update /etc/nixos && nh os switch /etc/nixos";
       };
     };
   };

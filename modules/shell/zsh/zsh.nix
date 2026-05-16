@@ -2,12 +2,12 @@
 
 {
 
-  programs.zsh.enable = true;
-  users.users.dhanvanth.shell = pkgs.zsh;
+  programs.zsh.enable = false;
+#  users.users.dhanvanth.shell = pkgs.zsh;
 
   home-manager.users.dhanvanth = {
   programs.zsh = {
-    enable = true;
+    enable = false;
     enableCompletion = true;
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;

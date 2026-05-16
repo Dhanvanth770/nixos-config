@@ -3,8 +3,9 @@
 {
   home-manager.users.dhanvanth = {
      programs.starship = {
-      enable = true;
+      enable = false;
       enableZshIntegration = true;
+      enableFishIntegration = false;	
       settings = {
         format = "$directory$git_branch$git_status$fill$time\n$character";
         directory = {
