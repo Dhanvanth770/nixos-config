@@ -3,7 +3,6 @@
 {
   home-manager.users.dhanvanth = {
     programs.fish = {
-      enable = true; 
       shellAliases = {
         rebuild = "sudo nixos-rebuild switch --flake /etc/nixos#thispc";
         upgrade = "cd /etc/nixos && sudo nix flake update && sudo nixos-rebuild switch --flake .#thispc";

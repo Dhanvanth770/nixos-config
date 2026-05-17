@@ -1,27 +1,21 @@
 { inputs, pkgs, ... }:
 
 {
-
-  users.users.dhanvanth = {  shell = pkgs.fish;  };
   programs.fish.enable = true;
-
+  users.users.dhanvanth = {  shell = pkgs.fish;  };
   home-manager.users.dhanvanth = {
   programs.fish = {
     enable = true;
-  
   interactiveShellInit = ''
     set fish_greeting ""
+    set -g fish_prompt_pwd_dir_length 0
   
     if not set -q _NITCH_ONCE
       set -gx _NITCH_ONCE 1
       ${pkgs.nitch}/bin/nitch
     end
-
-    # autocd
     set -g fish_features autocd
   '';
-  
-  # extract
   functions = {
     extract = ''
       if test -f $argv[1]
@@ -45,8 +39,6 @@
         echo "File not found: $argv[1]"
       end
     '';
-
-    # web search function
     google = ''
       open "https://www.google.com/search?q="(string join "+" $argv)
     '';

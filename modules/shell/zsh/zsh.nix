@@ -1,10 +1,7 @@
 { config, pkgs, ... }:
 
 {
-
-  programs.zsh.enable = false;
 #  users.users.dhanvanth.shell = pkgs.zsh;
-
   home-manager.users.dhanvanth = {
   programs.zsh = {
     enable = false;
