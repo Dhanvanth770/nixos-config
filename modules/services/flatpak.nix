@@ -15,7 +15,6 @@
     }
   ];
   packages = [
-    { appId = "dev.vencord.Vesktop"; origin = "flathub"; }
     { appId = "app.zen_browser.zen"; origin = "flathub"; }
     { appId = "org.videolan.VLC"; origin = "flathub"; }
     { appId = "com.visualstudio.code"; origin = "flathub"; }
@@ -28,6 +27,7 @@
     { appId = "com.bitwarden.desktop"; origin = "flathub"; }
     { appId = "org.torproject.torbrowser-launcher"; origin = "flathub"; }
     { appId = "io.gitlab.news_flash.NewsFlash"; origin = "flathub-beta"; }
+    { appId = "io.github.milkshiift.GoofCord "; origin = "flathub"; }
     ];
   overrides = {
       global = {

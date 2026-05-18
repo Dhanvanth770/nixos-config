@@ -6,10 +6,17 @@
   home-manager.users.dhanvanth = {
   programs.fish = {
     enable = true;
-  interactiveShellInit = ''
+    plugins = [
+      {
+      name = "fzf-fish";
+      src = pkgs.fishPlugins.fzf-fish.src;
+      }
+    ];
+    interactiveShellInit = ''
     set fish_greeting ""
     set -g fish_prompt_pwd_dir_length 0
-  
+    set -g fzf_directory_opts --bind "alt-e:execute(nano {} &> /dev/tty)+abort"
+     fzf_configure_bindings --directory=\et --history=\er
     if not set -q _NITCH_ONCE
       set -gx _NITCH_ONCE 1
       ${pkgs.nitch}/bin/nitch

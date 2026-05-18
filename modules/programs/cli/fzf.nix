@@ -1,10 +1,20 @@
 { inputs, pkgs, ... }:
 
 {
+  environment.systemPackages = with pkgs; [
+  fzf
+  fishPlugins.fzf-fish
+  ];
   home-manager.users.dhanvanth = {
     programs.fzf = {
       enable = true;
       enableFishIntegration = true;
+      changeDirWidgetCommand = "fd --type d";
+      fileWidgetCommand = "fd --type f";
+        fileWidgetOptions = [
+          "--preview 'bat --color=always {}'" 
+          "--bind 'enter:become(nano {})'"   
+        ];
       colors = {
         "bg+" = "#000000";
         "bg" = "#000000";

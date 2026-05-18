@@ -1,30 +1,35 @@
-{ config, pkgs, lib, inputs, ... }:
+{ pkgs, inputs, config, lib, ... }:
 
 {
   programs.niri = {
     enable = true;
+    package = inputs.niri.packages.${pkgs.stdenv.hostPlatform.system}.niri;
   };
 
-  services.displayManager.sessionPackages = [ pkgs.niri ];
-  programs.xwayland.enable = true;
+   programs.xwayland.enable = true;
 
-  xdg.portal = {
+   xdg.portal = {
     enable = true;
     xdgOpenUsePortal = true;
     extraPortals = [ 
-      pkgs.xdg-desktop-portal-gtk 
+      pkgs.xdg-desktop-portal-gnome
+      pkgs.xdg-desktop-portal-gtk
+    ];
+    config = {
+      niri = {
+        default = [ "gnome" "gtk" ];
+          "org.freedesktop.impl.portal.FileChooser" = [ "gtk" ];
+          "org.freedesktop.impl.portal.Settings" = [ "gtk" ];
+        };
+      };
+    };
+
+  home-manager.users.dhanvanth = {
+    home.packages = [
       pkgs.xdg-desktop-portal-gnome
     ];
-    config = lib.mkForce {
-    common = {
-      default = [ "gnome" "gtk" ];
-      "org.freedesktop.impl.portal.Settings" = [ "gtk" ]; 
-      "org.freedesktop.impl.portal.FileChooser" = [ "gtk" ];
-      };
-    niri.default = [ "gnome" "gtk" ];
-    };
   };
-
+ 
   security.polkit.enable = true;
   environment.systemPackages = with pkgs; [ polkit_gnome ];
 }

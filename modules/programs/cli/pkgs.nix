@@ -3,6 +3,7 @@
 {
   home-manager.users.dhanvanth = {
   home.packages = with pkgs; [
+  fd
   nitch
   btop
   cava
@@ -18,6 +19,8 @@
   tmux
   lazygit
   bottom
+  claude-code
+  opencode
   ];
  };
 }

@@ -65,6 +65,9 @@
       spawn-at-startup "sh" "-c" "exec $(find /nix/store -name polkit-gnome-authentication-agent-1 -type f -executable | head -n 1)"
       spawn-at-startup "noctalia-shell"
       spawn-at-startup "xwayland-satellite"
+      spawn-at-startup "systemctl" "--user" "import-environment" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP"
+      spawn-at-startup "dbus-update-activation-environment" "--systemd" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP=niri"
+      spawn-at-startup "systemctl" "--user" "start" "xdg-desktop-portal-gnome"
 
       screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
 
@@ -100,7 +103,7 @@
       }
 
       window-rule {
-          match app-id="vesktop"
+          match app-id="goofcord"
           opacity 0.77
           background-effect {
               blur true
